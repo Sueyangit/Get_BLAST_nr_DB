@@ -1,10 +1,18 @@
 #!/bin/bash
 
 LOCAL_BLAST_DB="/blast/db"
+DIR1=`dirname $LOCAL_BLAST_DB`
+if [ ! -d $DIR1 ]; then
+  mkdir $DIR1
+fi
 if [ ! -d $LOCAL_BLAST_DB ]; then
   mkdir $LOCAL_BLAST_DB
 fi
 cd $LOCAL_BLAST_DB
+if [ $? -ne 0 ];then
+  exit 1 # Can't cd to $LOCAL_BLAST_DB
+fi
+
 
 URL1="ftp://ftp.ncbi.nlm.nih.gov/blast/db/nr."
 URL2=".tar.gz"
